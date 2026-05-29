@@ -1,0 +1,4 @@
+# Offline test suite: no API key, no network. The exploit-regression suite runs
+# on the deliberately-gullible mock model.
+pydantic>=2.7
+pytest>=8.2

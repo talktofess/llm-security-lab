@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  exploit-regression:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: pip install -r requirements-test.txt
+      # Every exploit must land on vulnerable and be blocked + detected on hardened.
+      - run: pytest -q
+      # Report must regenerate from live runs without drift.
+      - run: python -m seclab.cli report --out /tmp/REPORT.md

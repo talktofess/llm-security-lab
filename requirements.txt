@@ -1,0 +1,5 @@
+# Core. The whole vulnerable->hardened->detected loop runs on these (the mock
+# model needs nothing beyond pydantic). `anthropic` is only for the optional
+# real-model backend.
+pydantic>=2.7
+anthropic>=0.40
